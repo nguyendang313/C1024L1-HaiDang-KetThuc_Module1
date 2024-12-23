@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <script>
+      // Hàm kiểm tra định dạng MM/yyyy
+      function isValidDate(dateString) {
+          const regex = /^(0[1-9]|1[0-2])\/\d{4}$/;
+          return regex.test(dateString);
+      }
+
+      // Hàm kiểm tra năm nhuận
+      function isLeapYear(year) {
+          if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+              return true;  // Năm nhuận
+          }
+          return false;  // Không phải năm nhuận
+      }
+
+      // Hàm trả về số ngày trong tháng
+      function getDaysInMonth(month, year) {
+          if (month === 2) {
+              // Nếu là tháng 2, kiểm tra năm nhuận
+              if (isLeapYear(year)) {
+                  return 29;  // Tháng 2 có 29 ngày nếu là năm nhuận
+              } else {
+                  return 28;  // Tháng 2 có 28 ngày nếu không phải năm nhuận
+              }
+          } else {
+              // Các tháng còn lại, sử dụng logic mặc định
+              return new Date(year, month, 0).getDate();
+          }
+      }
+
+      // Nhập tháng và năm từ người dùng
+      let monthYear = prompt("Nhập tháng và năm theo định dạng MM/yyyy:");
+
+      while (!isValidDate(monthYear)) {
+          alert("Định dạng nhập không hợp lệ! Vui lòng nhập đúng định dạng MM/yyyy.");
+          monthYear = prompt("Nhập tháng và năm theo định dạng MM/yyyy:");
+      }
+
+      // Tách tháng và năm từ chuỗi nhập vào
+      let [month, year] = monthYear.split("/");
+
+      // Chuyển đổi tháng và năm thành số nguyên
+      month = parseInt(month, 10);
+      year = parseInt(year, 10);
+
+      // Kiểm tra tính hợp lệ của tháng và năm
+      if (month < 1 || month > 12 || year <= 0) {
+          alert("Tháng hoặc năm không hợp lệ!");
+      } else {
+          // Tính số ngày trong tháng
+          let daysInMonth = getDaysInMonth(month, year);
+          document.write(`Tháng ${month} năm ${year} có ${daysInMonth} ngày.`);
+      }
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        // Khai báo mảng rỗng
+        let arr = [];
+
+        // Yêu cầu người dùng nhập số phần tử (khoảng từ 1 đến 50)
+        let numElements;
+        do {
+            numElements = parseInt(prompt("Nhập số phần tử (không vượt quá 50):"));
+
+            // Kiểm tra số nhập vào hợp lệ (số nguyên và không vượt quá 50)
+            if (isNaN(numElements) || numElements <= 0 || numElements > 50) {
+                alert("Vui lòng nhập số từ 1 đến 50.");
+            }
+        } while (isNaN(numElements) || numElements <= 0 || numElements > 50);
+
+        // Nhập các giá trị cho mảng và kiểm tra xem đó có phải là số không
+        for (let i = 0; i < numElements; i++) {
+            let element;
+            do {
+                element = prompt(`Nhập phần tử thứ ${i + 1}:`);
+
+                // Kiểm tra nếu giá trị nhập vào có phải là một số không
+                if (isNaN(element) || element.trim() === "") {
+                    alert("Phần tử phải là một số hợp lệ.");
+                } else {
+                    element = parseInt(element);  // Chuyển phần tử thành số nguyên
+                    break; // Thoát khỏi vòng lặp nếu phần tử là số hợp lệ
+                }
+            } while (isNaN(element) || element.trim() === "");  // Tiếp tục yêu cầu nhập nếu không phải số
+
+            arr.push(element);  // Thêm phần tử vào mảng
+        }
+
+        // Hiển thị mảng
+        document.write("Mảng bạn đã nhập là: ", arr + "<br>");
+
+        let sum = 0;
+        let count = 0;
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] % 3 === 0) {  // Kiểm tra phần tử chia hết cho 3
+                sum += arr[i];
+                count++;
+            }
+        }
+
+        // Tính trung bình cộng và hiển thị kết quả
+        if (count > 0) {
+            let average = sum / count;
+            document.write("Trung bình cộng các số chia hết cho 3 là: " + average);
+        } else {
+            document.write("Không có số nào chia hết cho 3 trong mảng.");
+        }
+
+    </script>
+</body>
+</html>
